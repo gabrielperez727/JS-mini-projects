@@ -16,6 +16,18 @@ for(let i = 0; i < dropList.length; i++){
        let optionTag = `<option value="${currency_code}"${selected}>${currency_code}</option>`;
         dropList[i].insertAdjacentHTML("beforeend", optionTag)
     }
+    dropList[i].addEventListener("change", e => {
+        loadFlag(e.target)
+    })
+}
+
+function loadFlag(element){
+    for(code in country_code) {
+        if(code == element.value) {
+            let imgTag = element.parentElement.querySelector("img")
+            imgTag.src = `https://flagsapi.com/${country_code[code]}/flat/64.png`
+        }
+    }
 }
 
 getButton.addEventListener("click", e => {
