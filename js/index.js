@@ -30,5 +30,11 @@ function getExchangeRate(){
         amount.value = '1';
         amountVal = 1;
     }
-    let url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${fromCurrency.value}`;
+    let url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${fromCurrency[0].value}`;
+    fetch(url).then(response => response.json()).then(result => {
+        let exchangeRate = result.conversion_rates[toCurrency[0].value]
+        let totalExchangeRate = (amountVal * exchangeRate)
+        const exchangeRateTxt = document.querySelector(".exchange-rate")
+        exchangeRateTxt.innerHTML = `${amountVal} ${fromCurrency[0].value} = ${totalExchangeRate} ${toCurrency[0].value}`
+    });
 }
